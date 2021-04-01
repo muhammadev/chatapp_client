@@ -19,10 +19,10 @@ export default function Login() {
 
   // form data states
   const [email, setEmail] = useState("");
-  const [emailErr, setEmailErr] = useState("");
+  const [emailErr, setEmailErr] = useState(null);
   const [pw, setPw] = useState("");
-  const [pwErr, setPwErr] = useState("");
-  const [globalError, setGlobalError] = useState("");
+  const [pwErr, setPwErr] = useState(null);
+  const [globalError, setGlobalError] = useState(null);
 
   const updateErrors = (errors) => {
     errors?.forEach((error) => {
@@ -60,7 +60,6 @@ export default function Login() {
     };
 
     const completeLogin = ({ ok, status, data }) => {
-      console.log("got here too");
       if (ok) {
         const { token, user } = data;
         setToken(token);
@@ -99,6 +98,7 @@ export default function Login() {
             placeholder="Ex: john499@example.com"
             onChange={(e) => {
               setEmail(e.target.value);
+              setEmailErr(null);
             }}
             required
             autoComplete="new-password"
@@ -133,7 +133,6 @@ export default function Login() {
               let isValidationPassed = isEmailValid && isPwValid;
 
               if (isValidationPassed) {
-                console.log("got here");
                 handleSubmit();
               } else {
                 setGlobalError("something is wrong");
@@ -145,7 +144,7 @@ export default function Login() {
           </button>
         </div>
         <p className="lowercase text-center">
-          didn't register yet?{" "}
+          don't have an account?{" "}
           <Link
             to="/register"
             className="text-indigo-500 hover:text-indigo-900"

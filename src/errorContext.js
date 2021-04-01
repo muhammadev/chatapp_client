@@ -9,7 +9,6 @@ export function ErrorProvider({ children }) {
   const [error, setError] = useState();
 
   const updateError = (err) => {
-    console.log({err});
     setError(err);
   };
 

@@ -16,7 +16,8 @@ export default function useUser(id) {
   const [user, setUser] = useState(null);
 
   const fetchUser = (id) => {
-    const url = `/users/${id}`;
+    console.log("useUser is called to fetch: ", id);
+    const url = `/api/users/${id}`;
     const headers = new Headers();
     headers.set("Authentication", token);
     const options = {
@@ -30,6 +31,7 @@ export default function useUser(id) {
         if (ok) {
           setUser(data.user);
         } else {
+          console.log("was not okay, ", data);
           history.push("/login");
         }
       }
@@ -42,7 +44,8 @@ export default function useUser(id) {
     if (mountedRef.current && token) fetchUser(id);
 
     return () => {mountedRef.current = false};
-  }, [token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, id])
 
-  return { user, isFetched, setUser: fetchUser, serverError };
+  return { isFetched, user, setUser: fetchUser, serverError };
 }

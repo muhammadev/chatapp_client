@@ -9,6 +9,7 @@ module.exports = {
       backgroundColor: ['disabled'],
       textColor: ['disabled'],
       borderWidth: ['focus'],
+      display: ['group-hover'],
     },
   },
   plugins: [],

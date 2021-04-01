@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import userContext from "../userContext";
 import useUsers from "../useUsers";
 export default function SearchUsers() {
-  // doFetch & get users & process them...
-
   const { user: currentUser } = useContext(userContext);
 
   const [matchedUsers, setMatchedUsers] = useState([]);
@@ -32,7 +30,7 @@ export default function SearchUsers() {
   return (
     <div className="absolute w-full md:mt-4 text-center">
       <h3 className="md:text-xl">search a name to chat with</h3>
-      <div className="m-auto w-full border border-gray-300 bg-gray-100 rounded focus-within:bg-gray-200 focus-within:border-b-0 placeholder-gray-500">
+      <div className="m-auto w-full bg-gray-50 border border-gray-300 rounded focus-within:shadow-inner focus-within:border-b-0 placeholder-gray-500">
         <input
           className="focus:outline-none p-2 w-full bg-transparent"
           type="text"
@@ -50,7 +48,7 @@ export default function SearchUsers() {
               return (
                 <div key={user.username}>
                   <Link
-                    to={`/chat-room/${user._id}`}
+                    to={`/room/${user._id}`}
                     className="hover:bg-gray-300 p-2 flex justify-start rounded"
                   >
                     <p className="">{user.fullname}</p>

@@ -17,7 +17,7 @@ export default function useUsers() {
   });
 
   const fetchUsers = () => {
-    const url = '/users';
+    const url = '/api/users';
     const headers = new Headers();
     headers.set("Authentication", token);
     const options = {
@@ -47,6 +47,7 @@ export default function useUsers() {
     return () => {
       mountedRef.current = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return { users, fetched, setUsers: fetchUsers, serverError };

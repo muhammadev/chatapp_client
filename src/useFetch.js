@@ -14,7 +14,6 @@ export default function useFetch() {
       return callback({ ok, status, data });
     } catch (err) {
       console.log(err);
-      // setError("someone killed the server! call the police!");
     }
   };
 

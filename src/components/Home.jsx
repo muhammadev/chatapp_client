@@ -6,17 +6,13 @@ import userContext from "../userContext";
 
 export default function Home() {
   // const { error, setError } = useContext(errorContext);
-  const { user, fetched } = useContext(userContext);
+  const { user, isFetched } = useContext(userContext);
 
-  // if (error) {
-  //   return <div className="h-screen capitalize flex flex-col justify-center items-center font-bold font-mono text-4xl">{error}</div>
-  // }
-
-  if (fetched) {
+  if (isFetched) {
     if (user) {
       return (
-        <div className="capitalize absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-3xl md:text-5xl my-4">
+        <div className="w-2/3 capitalize absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <h1 className="text-center text-3xl md:text-5xl my-4 w-full ">
             welcome {user?.fullname?.split(" ")[0]}
           </h1>
           <SearchUsers />

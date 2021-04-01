@@ -8,12 +8,12 @@ export default function useSocket() {
 
   const [socket, setSocket] = useState(null);
 
-  const createSocket = (username) => {
+  const createSocket = (id) => {
     try {
       setSocket(
-        io('http://192.168.1.6:3001', {
+        io('http://192.168.1.5:3001', {
           query: {
-            user: username,
+            user: id,
           },
         })
       );

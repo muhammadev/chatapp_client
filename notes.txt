@@ -1,0 +1,86 @@
+**** CLIENT ****
+no rooms
+-- a socket sends with 'to' property
+-- a socket recieves with 'from' property
+-- a socket can chat with multiple sockets at the same time
+-- once a logged in user, a socket instance is created and apears online to other sockets
+-- if a socket recieves from other than partner in chat page, a notification is sent
+
+
+-- a socket instance listens to 'message' event from the parent component, App.js
+-- App.js recieves the message and 
+
+**** API ****
+-- a socket instance gets created
+-- a "message" event gets signed up to
+
+**** MESSAGE LIFE CYCLE ****
+- message gets initiated (user sends a message) [status = 0]
+- App emits message to server
+- server receives the message and checks whether partner is online [status = 1]
+    - if online: emits message to partner
+    - else: saves message to partner's messages field in db
+- partner receives message
+    - if in room with sender: emits 'seen' [status = 2]
+    - if not: push notification [status still = 1]
+        - when in room with sender: emits 'seen' [status = 2]
+
+
+TODOs
+    1- prepare Message model                    - Done
+    2- add sending message functionality        - Done
+    3- add saving message functionality         - Done
+    4- add receiving message functionality      - Done
+    6- fetch messages functionality             - Done
+    7- add notifications functionality          -
+
+
+Note:
+    - on login: get messages sent to me which is not marked seen (status < 2) to push notifications
+    - in room: get messages of both user and his partner
+
+    - chatContext is an object that holds chat array of each participant
+    - on room enter, chat array of current room's participant will be fetched and set to chatContext object with participant's username as key
+    - on 'message' event, if message sender's username is registered as a key in chatContext's object, the message will be pushed to his array
+        if not registered, participant will be registered
+    - on 'message', if user is not 'inRoomWith' message sender, it'll be pushed as a notification
+
+    - 'notification' event is sent on each new message, and client app will dismiss if user is inRoomWith sender
+
+
+- Trash Bin of Code
+  // method for receiving the 'sent' event, it looks up for the same message in the chat array to replace it with the version saved in db
+  const markSent = (sentMessage) => {
+    const { text } = sentMessage; // destructure message's id and sender username
+
+    const updatedChat = chat.map((msg) => {
+      return msg.text === text ? sentMessage : msg;
+    });
+
+    setChat(updatedChat);
+  };
+  // method for receiving the 'delivered' event which is a confirmation that the participant has received my message
+  const markDelivered = (deliveredMessages) => {
+    let updatedChat = chat.map((msg) => {
+      deliveredMessages.forEach((deliveredMessage) => {
+        const { _id } = deliveredMessage;
+        msg = msg._id === _id ? deliveredMessage : msg;
+      });
+
+      return msg;
+    });
+
+    setChat(updatedChat);
+  };
+  const markSeen = (seenMessages) => {
+    let updatedChat = chat.map((msg) => {
+      seenMessages.forEach((seenMessage) => {
+        const { _id } = seenMessage;
+        msg = msg._id === _id ? seenMessage : msg;
+      });
+
+      return msg;
+    });
+
+    setChat(updatedChat);
+  };
