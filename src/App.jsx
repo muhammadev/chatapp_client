@@ -8,7 +8,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Header from "./components/Header";
 import Profile from "./components/Profile";
-import ChatRoom from "./components/ChatRoom";
+import ChatRoom from "./components/room/ChatRoom";
 
 // custom hooks
 import useSocket from "./useSocket";
@@ -34,12 +34,13 @@ function App() {
 
   // **** methods ****
   const notificationsOnLogin = (undeliveredMessages) => {
-    // console.log("got notifications: ", { undeliveredMessages });
     // emit to server to mark as delivered
-    socket?.emit('delivered', undeliveredMessages);
+    socket?.emit("delivered", undeliveredMessages);
 
     // notifications must be pushed as an array
-    undeliveredMessages = Array.isArray(undeliveredMessages) ? undeliveredMessages : [undeliveredMessages];
+    undeliveredMessages = Array.isArray(undeliveredMessages)
+      ? undeliveredMessages
+      : [undeliveredMessages];
 
     // assign besides the notifications state not overwrite the old notifications
     setNotifications([...notifications, ...undeliveredMessages]);
@@ -47,19 +48,21 @@ function App() {
   const pushNotification = (message) => {
     console.log("I may push a notification now");
     if (user?.inRoomWith !== message.from.username) {
-      socket?.emit('delivered', message);
+      socket?.emit("delivered", message);
       console.log("I should push this message as a notification: ", message);
       setNotifications([...notifications, message]);
     }
-  }
+  };
 
   // **** useEffects ****
   // connect socket
   useEffect(() => {
+    console.log("I will run each time user context updates", user);
     if (isFetchedUserContext && user) {
       setSocket(user._id);
       // console.log("setting a socket instance for ", user.username, user._id);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
   // disconnect socket on unmount
@@ -79,11 +82,11 @@ function App() {
   // listen to socket events unspecific to chat rooms
   useEffect(() => {
     if (socket) {
-      socket.on('notifications on login', notificationsOnLogin);
-      socket.on('notification', pushNotification);
+      socket.on("notifications on login", notificationsOnLogin);
+      socket.on("notification", pushNotification);
       return () => {
-        socket.off('notifications on login');
-        socket.off('notification');
+        socket.off("notifications on login");
+        socket.off("notification");
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,8 +95,8 @@ function App() {
   return (
     <Router>
       <div className="h-screen flex flex-col">
-        <Header notifications={notifications} />
-        <div className="flex-grow">
+        {user?.inRoomWith ? null : <Header notifications={notifications} />}
+        <div className="flex-grow mt-10">
           <Switch>
             <Route path="/login">
               <Login />
@@ -102,13 +105,21 @@ function App() {
               <Register />
             </Route>
             <Route path="/notifications">
-              <Notifications socket={socket} notifications={notifications} setNotifications={setNotifications} />
+              <Notifications
+                socket={socket}
+                notifications={notifications}
+                setNotifications={setNotifications}
+              />
             </Route>
             <Route path="/profile">
               <Profile />
             </Route>
             <Route path="/room/:id">
-              <ChatRoom socket={socket} />
+              <ChatRoom
+                socket={socket}
+                notifications={notifications}
+                setNotifications={setNotifications}
+              />
             </Route>
             <Route path="/" exact>
               <Home />

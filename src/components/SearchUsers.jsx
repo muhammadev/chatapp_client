@@ -29,8 +29,8 @@ export default function SearchUsers() {
 
   return (
     <div className="absolute w-full md:mt-4 text-center">
-      <h3 className="md:text-xl">search a name to chat with</h3>
-      <div className="m-auto w-full bg-gray-50 border border-gray-300 rounded focus-within:shadow-inner focus-within:border-b-0 placeholder-gray-500">
+      <h3 className="md:text-xl">who do you wanna chat with?</h3>
+      <div className="m-auto w-1/2 bg-gray-50 border border-gray-300 rounded focus-within:shadow-inner focus-within:border-b-0 placeholder-gray-500">
         <input
           className="focus:outline-none p-2 w-full bg-transparent"
           type="text"

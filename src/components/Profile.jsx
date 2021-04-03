@@ -16,9 +16,9 @@ export default function Profile() {
     <div className="h-full flex justify-center items-center text-center">
       {isFetched && user ? (
         <div>
-          <h3 className="text-2xl">{user.fullname}</h3>
+          <h2 className="text-2xl">{user.fullname} <small>({user.username})</small></h2>
           <button
-            className="w-40 h-10 border border-black hover:bg-red-400 cursor-pointer"
+            className="mt-10 w-40 h-10 border border-black hover:bg-red-500 cursor-pointer"
             onClick={() => {
               logout();
             }}

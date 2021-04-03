@@ -9,10 +9,6 @@ export default function Header({ notifications }) {
   const { user } = useContext(userContext);
 
   useEffect(() => {
-    console.log("notifications: ", notifications);
-  })
-
-  useEffect(() => {
     setPathname(window.location.pathname);
   }, [location, setPathname]);
 
@@ -20,8 +16,8 @@ export default function Header({ notifications }) {
     "sm:mx-4 md:mx-8 p-1 hover:bg-gray-100 border border-transparent hover:border-gray-300 rounded-sm";
   const activeLink = " bg-gray-100 border-gray-300 ";
   return (
-    <div className="relative top-0 left-0 w-full flex justify-around mt-2">
-      <h4 className="text-xl font-mono">chitchat</h4>
+    <div className="fixed z-10 bg-white shadow-md top-0 left-0 w-full flex justify-around py-2">
+      <h4 className="text-xl font-mono">Chit Chat</h4>
       {user ? (
         <ul className="flex justify-center">
           <Link
