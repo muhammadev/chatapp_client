@@ -11,7 +11,7 @@ export default function useSocket() {
   const createSocket = (id) => {
     try {
       setSocket(
-        io("http://192.168.1.9:3001", {
+        io("http://localhost:3001", {
           query: {
             user: id,
           },
