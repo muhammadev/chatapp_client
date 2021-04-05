@@ -4,8 +4,7 @@ import useFetch from "../useFetch";
 import useToken from "../useToken";
 import userContext from "../userContext";
 
-export default function Register(props) {
-  // const { currentUser, setCurrentUser, setToken } = props;
+export default function Register() {
   const history = useHistory();
 
   const { setResponse, error: serverError } = useFetch();
@@ -90,7 +89,7 @@ export default function Register(props) {
 
   const inputGroupStyle = "my-2 flex flex-col w-4/5 md:w-1/3 m-auto";
   const inputSyle =
-    "px-2 py-1 text-sm rounded-sm border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 focus:bg-indigo-100 focus:text-black focus:outline-none";
+    "px-2 py-2 text-sm rounded border border-indigo-300 bg-gray-50 hover:bg-indigo-100 focus:bg-indigo-100 focus:text-black focus:outline-none";
   return (
     <div className="h-screen flex flex-col justify-center items-center">
       <h1 className="text-4xl mb-10">Register</h1>
@@ -267,7 +266,7 @@ export default function Register(props) {
             }}
           />
         </div>
-        <p className="lowercase text-center">
+        <p className="lowercase text-center mt-2">
           have an account?{" "}
           <Link to="/login" className="text-indigo-500 hover:text-indigo-900">
             login

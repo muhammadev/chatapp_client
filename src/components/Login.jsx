@@ -79,18 +79,18 @@ export default function Login() {
   //   return <ServerDown err={error} />
   // }
 
-  const inputGroupStyle = "my-2 flex flex-col w-4/5 md:w-1/3 m-auto";
+  const inputGroupStyle = "mb-4 flex flex-col w-4/5 md:w-1/3 m-auto";
   const inputSyle =
-    "px-2 py-1 text-sm rounded-sm border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 focus:bg-indigo-100 focus:text-black focus:outline-none";
+    "px-2 py-2 text-sm rounded border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 focus:bg-indigo-100 focus:text-black focus:outline-none";
   return (
     <div className="h-screen flex flex-col justify-center items-center">
-      <h1 className="text-4xl mb-10">Log In</h1>
+      <h1 className="text-4xl mb-8">Log In</h1>
       <form className="w-full">
         <p className="text-center text-red-500">
           {globalError ? "incorrect email or password" : ""}
         </p>
         <div className={inputGroupStyle}>
-          <label htmlFor="email">email</label>
+          <label htmlFor="email">Email</label>
           <input
             className={inputSyle}
             type="email"
@@ -107,7 +107,7 @@ export default function Login() {
           <span className="text-sm text-red-700">{emailErr}</span>
         </div>
         <div className={inputGroupStyle}>
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">Password</label>
           <input
             className={inputSyle}
             type="password"
@@ -144,7 +144,7 @@ export default function Login() {
             <span></span>
           </button>
         </div>
-        <p className="lowercase text-center">
+        <p className="lowercase text-center mt-2">
           don't have an account?{" "}
           <Link
             to="/register"

@@ -21,14 +21,14 @@ export default function Home() {
     }
     return (
       <div className="h-screen capitalize flex flex-col justify-center items-center">
-        <h1 className="text-2xl md:text-4xl my-4">welcome to chat app</h1>
+        <h1 className="text-2xl md:text-4xl my-4">welcome to chit chat</h1>
         <Link
           to="/register"
           className="p-4 border text-white border-blue-800 bg-blue-600 hover:bg-blue-700"
         >
           Register Now!
         </Link>
-        <p className="lowercase">
+        <p className="lowercase mt-2">
           have an account?{" "}
           <Link to="/login" className="text-indigo-500 hover:text-indigo-900">
             login
