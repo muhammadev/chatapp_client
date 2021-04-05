@@ -8,9 +8,9 @@ export default function Register(props) {
   // const { currentUser, setCurrentUser, setToken } = props;
   const history = useHistory();
 
-  const { setResponse, error: serverError} = useFetch();
+  const { setResponse, error: serverError } = useFetch();
   const { setToken } = useToken();
-  const {user, setUser} = useContext(userContext);
+  const { user, setUser } = useContext(userContext);
 
   useEffect(() => {
     // if current user exists, redirect to home page
@@ -88,13 +88,14 @@ export default function Register(props) {
     });
   };
 
+  const inputGroupStyle = "my-2 flex flex-col w-4/5 md:w-1/3 m-auto";
   const inputSyle =
     "px-2 py-1 text-sm rounded-sm border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 focus:bg-indigo-100 focus:text-black focus:outline-none";
   return (
     <div className="h-screen flex flex-col justify-center items-center">
       <h1 className="text-4xl mb-10">Register</h1>
       <form className="w-full">
-        <div className="my-2 flex flex-col w-1/2 md:w-1/3 m-auto">
+        <div className={inputGroupStyle}>
           <label htmlFor="fullname">full name</label>
           <input
             className={inputSyle}
@@ -117,7 +118,7 @@ export default function Register(props) {
           />
           <span className="text-sm text-red-700">{fullnameErr}</span>
         </div>
-        <div className="my-2 flex flex-col w-1/2 md:w-1/3 m-auto">
+        <div className={inputGroupStyle}>
           <label htmlFor="username">username</label>
           <input
             className={inputSyle}
@@ -146,7 +147,7 @@ export default function Register(props) {
           />
           <span className="text-sm text-red-700">{usernameErr}</span>
         </div>
-        <div className="my-2 flex flex-col w-1/2 md:w-1/3 m-auto">
+        <div className={inputGroupStyle}>
           <label htmlFor="email">email</label>
           <input
             className={inputSyle}
@@ -171,7 +172,7 @@ export default function Register(props) {
           />
           <span className="text-sm text-red-700">{emailErr}</span>
         </div>
-        <div className="my-2 flex flex-col w-1/2 md:w-1/3 m-auto">
+        <div className={inputGroupStyle}>
           <label htmlFor="password">password</label>
           <input
             className={inputSyle}
@@ -201,7 +202,7 @@ export default function Register(props) {
           />
           <span className="text-sm text-red-700">{pwErr}</span>
         </div>
-        <div className="my-2 flex flex-col w-1/2 md:w-1/3 m-auto">
+        <div className={inputGroupStyle}>
           <label htmlFor="cpassword">confirm password</label>
           <input
             className={inputSyle}
@@ -261,7 +262,7 @@ export default function Register(props) {
               if (isValidationPassed) {
                 handleSubmit();
               } else {
-                setCpw("something is wrong")
+                setCpw("something is wrong");
               }
             }}
           />

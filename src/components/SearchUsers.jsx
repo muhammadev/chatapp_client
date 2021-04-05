@@ -30,7 +30,7 @@ export default function SearchUsers() {
   return (
     <div className="absolute w-full md:mt-4 text-center">
       <h3 className="md:text-xl">who do you wanna chat with?</h3>
-      <div className="m-auto w-1/2 bg-gray-50 border border-gray-300 rounded focus-within:shadow-inner focus-within:border-b-0 placeholder-gray-500">
+      <div className="m-auto w-4/5 md:w-1/2 bg-gray-50 border border-gray-300 rounded focus-within:shadow-inner focus-within:border-b-0 placeholder-gray-500">
         <input
           className="focus:outline-none p-2 w-full bg-transparent"
           type="text"
@@ -49,10 +49,10 @@ export default function SearchUsers() {
                 <div key={user.username}>
                   <Link
                     to={`/room/${user._id}`}
-                    className="hover:bg-gray-300 p-2 flex justify-start rounded"
+                    className="hover:bg-gray-300 p-2 flex flex-col items-start"
                   >
                     <p className="">{user.fullname}</p>
-                    <p className="text-sm text-gray-700 leading-relaxed mx-2">
+                    <p className="text-xs text-gray-700 leading-relaxed mx-1">
                       @{user.username}
                     </p>
                   </Link>

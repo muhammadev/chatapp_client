@@ -79,6 +79,7 @@ export default function Login() {
   //   return <ServerDown err={error} />
   // }
 
+  const inputGroupStyle = "my-2 flex flex-col w-4/5 md:w-1/3 m-auto";
   const inputSyle =
     "px-2 py-1 text-sm rounded-sm border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 focus:bg-indigo-100 focus:text-black focus:outline-none";
   return (
@@ -88,7 +89,7 @@ export default function Login() {
         <p className="text-center text-red-500">
           {globalError ? "incorrect email or password" : ""}
         </p>
-        <div className="my-2 flex flex-col w-1/2 md:w-1/3 m-auto">
+        <div className={inputGroupStyle}>
           <label htmlFor="email">email</label>
           <input
             className={inputSyle}
@@ -105,7 +106,7 @@ export default function Login() {
           />
           <span className="text-sm text-red-700">{emailErr}</span>
         </div>
-        <div className="my-2 flex flex-col w-1/2 md:w-1/3 m-auto">
+        <div className={inputGroupStyle}>
           <label htmlFor="password">password</label>
           <input
             className={inputSyle}

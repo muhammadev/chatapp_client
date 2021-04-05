@@ -11,7 +11,7 @@ export default function Home() {
   if (isFetched) {
     if (user) {
       return (
-        <div className="w-2/3 capitalize absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="w-11/12 md:w-2/3 capitalize absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <h1 className="text-center text-3xl md:text-5xl my-4 w-full ">
             welcome {user?.fullname?.split(" ")[0]}
           </h1>
@@ -24,7 +24,7 @@ export default function Home() {
         <h1 className="text-2xl md:text-4xl my-4">welcome to chat app</h1>
         <Link
           to="/register"
-          className="p-4 border border-red-300 bg-red-100 hover:bg-red-300"
+          className="p-4 border text-white border-blue-800 bg-blue-600 hover:bg-blue-700"
         >
           Register Now!
         </Link>
