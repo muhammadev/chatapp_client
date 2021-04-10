@@ -11,7 +11,7 @@ export default function useSocket() {
   const createSocket = (id) => {
     try {
       setSocket(
-        io("http://chitchattyapp.herokuapp.com", {
+        io("http://localhost", {
           query: {
             user: id,
           },

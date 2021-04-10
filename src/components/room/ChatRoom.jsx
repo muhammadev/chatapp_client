@@ -47,7 +47,6 @@ export default function ChatRoom({ socket, notifications, setNotifications }) {
     setResponse(url, options, callback);
   };
   const sendMessage = () => {// method for emitting a message to server and adding the current version of the message temporarily to chat array until receing the 'sent' event
-    console.log("I'll send a message");
     // format the message
     let newMessage = {
       _id: uuidv4(), // temporary id to be used as a key to the rendered message element -- as soon as the reformated message comes from server it will no longer be existed
@@ -58,7 +57,6 @@ export default function ChatRoom({ socket, notifications, setNotifications }) {
       seen: false,
     };
 
-    console.log("sending a message...", newMessage, chat);
     setChat([...chat, newMessage]);
     window.scroll(0, document.body.scrollHeight + 1000); // scroll down on each message
 
@@ -69,8 +67,10 @@ export default function ChatRoom({ socket, notifications, setNotifications }) {
     setMessage("");
   };
   const receiveMessage = (message) => {
-    // add to chat array
-    setChat([...chat, message]);
+    if (message.from.username === participant.username) {
+      // add to chat array
+      setChat([...chat, message]);
+    }
   };
   const updateParticipant = (participantId) => {
     if (participant?._id === participantId) {
@@ -116,7 +116,6 @@ export default function ChatRoom({ socket, notifications, setNotifications }) {
         (msg) => msg.from.username === participant.username && !msg.seen
       );
       if (unseenMessages.length > 0) {
-        console.log("sending 'seen' event");
         socket.emit("seen", unseenMessages);
       }
     }

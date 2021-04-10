@@ -43,10 +43,9 @@ export function UserProvider({ children }) {
         if (ok) {
           let userData = data.user;
           userData['inRoomWith'] = null;
-          console.log(userData);
           setUser(userData);
         } else {
-          console.log({status});
+          console.log({status}, data);
           setUser(null);
         }
       };

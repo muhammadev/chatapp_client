@@ -16,7 +16,6 @@ export default function useUser(id) {
   const [user, setUser] = useState(null);
 
   const fetchUser = (id) => {
-    console.log("useUser is called to fetch: ", id);
     const url = `/api/users/${id}`;
     const headers = new Headers();
     headers.set("Authentication", token);
@@ -25,13 +24,13 @@ export default function useUser(id) {
       headers,
     };
 
-    const callback = ({ ok, data }) => {
+    const callback = ({ ok, status, data }) => {
       if (mountedRef.current) {
         setIsFetched(true)
         if (ok) {
           setUser(data.user);
         } else {
-          console.log("was not okay, ", data);
+          console.log(status, data);
           history.push("/login");
         }
       }

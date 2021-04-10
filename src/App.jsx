@@ -46,10 +46,8 @@ function App() {
     setNotifications([...notifications, ...undeliveredMessages]);
   };
   const pushNotification = (message) => {
-    console.log("I may push a notification now");
     if (user?.inRoomWith !== message.from.username) {
       socket?.emit("delivered", message);
-      console.log("I should push this message as a notification: ", message);
       setNotifications([...notifications, message]);
     }
   };
@@ -57,10 +55,8 @@ function App() {
   // **** useEffects ****
   // connect socket
   useEffect(() => {
-    console.log("I will run each time user context updates", user);
     if (isFetchedUserContext && user) {
       setSocket(user._id);
-      // console.log("setting a socket instance for ", user.username, user._id);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,10 +66,8 @@ function App() {
     if (socket) {
       if (!user && isFetchedUserContext) {
         socket.disconnect();
-        // console.log("disconnected... was this a logout?");
       }
       return () => {
-        console.log("unmounted component");
         socket.disconnect();
       };
     }
